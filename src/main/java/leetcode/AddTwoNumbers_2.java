@@ -18,8 +18,10 @@ package leetcode;
 public class AddTwoNumbers_2 {
     /**
      * 第一个想到的方法(失败，因为数值溢出)
-     * [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+     * [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1].length=31
      * [5,6,4]
+     * <p>
+     * Long的长度[9,2,2,3,3,7,2,0,3,6,8,5,4,7,7,5,8,0,7].length=18
      * <p>
      * 遍历list，获取被加数；计算；再将结果转为list
      * <p>
@@ -78,10 +80,68 @@ public class AddTwoNumbers_2 {
         return result;
     }
 
+
+    /**
+     * 方法二
+     * 遍历链表，完成计算，记录进位
+     * <p>
+     * 时间复杂度:O(max(m,n))
+     * 空间复杂度:O(n)
+     * <p>
+     * 思路：
+     * 两个指针指向l1、l2
+     * 移动指针，获取值计算,如为null则表示已经移到的链表的结尾
+     * 判断计算结构是否要进位
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode node = new ListNode(-1);
+        ListNode p = node, p1 = l1, p2 = l2;
+        boolean flag = false;
+        int carry = 0;
+        while (true) {
+            int val = 0;
+            if (flag) {
+                val++;
+            }
+            if (p1 == null && p2 == null) {
+                if (flag) {
+                    p.next = new ListNode(val);
+                }
+                break;
+            } else {
+                flag = false;
+            }
+            int v1 = (p1 == null) ? 0 : p1.val;
+            int v2 = (p2 == null) ? 0 : p2.val;
+            val = carry + v1 + v2;
+            if (val >= 10) {
+                carry = 1;
+                flag = true;
+            }
+            p.next = new ListNode(val % 10);
+            p = p.next;
+
+            if (p1 != null) {
+                p1 = p1.next;
+            }
+            if (p2 != null) {
+                p2 = p2.next;
+            }
+        }
+
+        return node.next;
+    }
+
+
     public static void main(String[] args) {
 
 
-        int[] num2 = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+//        int[] num2 = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+        int[] num2 = {5};
         ListNode l2 = new ListNode(num2[0]);
         ListNode p = l2;
         for (int i = 1; i < num2.length; i++) {
@@ -89,7 +149,7 @@ public class AddTwoNumbers_2 {
             p.next = node;
             p = node;
         }
-        int[] num1 = {5, 6, 4};
+        int[] num1 = {5};
         ListNode l1 = new ListNode(num1[0]);
         ListNode k = l1;
         for (int i = 1; i < num1.length; i++) {
@@ -99,8 +159,17 @@ public class AddTwoNumbers_2 {
         }
 
 
-        ListNode listNode = addTwoNumbersBrutal(l1, l2);
-        System.out.println();
+        ListNode listNode = addTwoNumbers(l1, l2);
+        ListNode read = addTwoNumbers(l1, l2);
+        System.out.println(listNode.toString());
+        while (true) {
+            if (read != null) {
+                System.out.print(read.val + "\t");
+                read = read.next;
+            } else {
+                break;
+            }
+        }
     }
 }
 
@@ -114,4 +183,5 @@ class ListNode {
     ListNode(int x) {
         val = x;
     }
+
 }
