@@ -100,27 +100,18 @@ public class AddTwoNumbers_2 {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode node = new ListNode(-1);
         ListNode p = node, p1 = l1, p2 = l2;
-        boolean flag = false;
         int carry = 0;
-        while (true) {
-            int val = 0;
-            if (flag) {
-                val++;
-            }
-            if (p1 == null && p2 == null) {
-                if (flag) {
-                    p.next = new ListNode(val);
-                }
-                break;
-            } else {
-                flag = false;
-            }
+        while (p1 != null || p2 != null) {
             int v1 = (p1 == null) ? 0 : p1.val;
             int v2 = (p2 == null) ? 0 : p2.val;
-            val = carry + v1 + v2;
+            int val = carry + v1 + v2;
+            //清除上一次的carry
+            if (carry > 0) {
+                carry = 0;
+            }
+
             if (val >= 10) {
-                carry = 1;
-                flag = true;
+                carry = val / 10;
             }
             p.next = new ListNode(val % 10);
             p = p.next;
@@ -132,7 +123,9 @@ public class AddTwoNumbers_2 {
                 p2 = p2.next;
             }
         }
-
+        if (carry > 0) {
+            p.next=new ListNode(carry);
+        }
         return node.next;
     }
 
@@ -141,7 +134,7 @@ public class AddTwoNumbers_2 {
 
 
 //        int[] num2 = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
-        int[] num2 = {5};
+        int[] num2 = {2,4,3};
         ListNode l2 = new ListNode(num2[0]);
         ListNode p = l2;
         for (int i = 1; i < num2.length; i++) {
@@ -149,7 +142,7 @@ public class AddTwoNumbers_2 {
             p.next = node;
             p = node;
         }
-        int[] num1 = {5};
+        int[] num1 = {5,6,4};
         ListNode l1 = new ListNode(num1[0]);
         ListNode k = l1;
         for (int i = 1; i < num1.length; i++) {
