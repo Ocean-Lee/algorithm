@@ -12,7 +12,7 @@ import java.util.Map;
  * @author ocean
  * @date 2019/8/22
  */
-public class TwoSum {
+public class TwoSum_1 {
     /**
      * 暴力搜索法
      * 时间复杂度:
@@ -133,7 +133,7 @@ public class TwoSum {
     public static void main(String[] args) {
         int[] nums = {3, 2, 4, 11};
         method();
-        int[] result = new TwoSum().twoSum(nums, 6);
+        int[] result = new TwoSum_1().twoSum(nums, 6);
         for (int i : result) {
             System.out.println(i);
         }
