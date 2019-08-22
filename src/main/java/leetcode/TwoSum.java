@@ -101,9 +101,39 @@ public class TwoSum {
         return null;
     }
 
+
+    /**
+     * leetcode上耗时最短的算法
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
+        int[] test = new int[2048];
+        for (int i = 0; i < nums.length; i++) {
+            //计算num=target - nums[i]的下标
+            int temp = (target - nums[i]) & 2047;
+            //判断num是否在test数组中，若不存在将num放入test数组中
+            if (test[temp] != 0) {
+                return new int[]{test[temp] - 1, i};
+            }
+            test[nums[i] & 2047] = i + 1;
+        }
+        return null;
+    }
+
+    public static void method() {
+        int[] num = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        int[] nums = {3, 2, 4};
-        int[] result = new TwoSum().twoSumMapOnce(nums, 6);
+        int[] nums = {3, 2, 4, 11};
+        method();
+        int[] result = new TwoSum().twoSum(nums, 6);
         for (int i : result) {
             System.out.println(i);
         }
