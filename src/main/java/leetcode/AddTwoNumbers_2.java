@@ -17,7 +17,10 @@ package leetcode;
  */
 public class AddTwoNumbers_2 {
     /**
-     * 第一个想到的方法
+     * 第一个想到的方法(失败，因为数值溢出)
+     * [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+     * [5,6,4]
+     * <p>
      * 遍历list，获取被加数；计算；再将结果转为list
      * <p>
      * 时间复杂度:
@@ -32,7 +35,6 @@ public class AddTwoNumbers_2 {
         long a = travel(l1);
         long b = travel(l2);
         long result = a + b;
-
         return buildListNode(result);
     }
 
@@ -79,7 +81,7 @@ public class AddTwoNumbers_2 {
     public static void main(String[] args) {
 
 
-        int[] num2 = {1, 9, 9, 9, 9, 9, 9, 9, 9, 9};
+        int[] num2 = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
         ListNode l2 = new ListNode(num2[0]);
         ListNode p = l2;
         for (int i = 1; i < num2.length; i++) {
@@ -87,9 +89,14 @@ public class AddTwoNumbers_2 {
             p.next = node;
             p = node;
         }
-        int[] num1 = {9};
+        int[] num1 = {5, 6, 4};
         ListNode l1 = new ListNode(num1[0]);
-
+        ListNode k = l1;
+        for (int i = 1; i < num1.length; i++) {
+            ListNode node = new ListNode(num1[i]);
+            k.next = node;
+            k = node;
+        }
 
 
         ListNode listNode = addTwoNumbersBrutal(l1, l2);
