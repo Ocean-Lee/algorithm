@@ -44,9 +44,15 @@ public class TwoSum {
     }
 
     /**
-     * 将数组的元素保存到Map中，减少查找对应元素的次数
-     * 时间复杂度:O(n)
-     * 空间复杂度:O(n)
+     * 以空间换时间
+     * <p>
+     * 将数组的元素保存到Map中，在不发生碰撞的情况下，将查找对应元素的次数降低到1次
+     * 如果发生碰撞，则查找次数退化到n次。因此这种方法的核心是设计合理的hash函数，以减少碰撞
+     * <p>
+     * 时间复杂度:O(n)  遍历两边map
+     * 空间复杂度:O(n)  需要一个map存放n个元素
+     * <p>
+     * 问题:如何避免初始化Map消耗了额外的时间
      *
      * @param nums
      * @param target
@@ -58,12 +64,38 @@ public class TwoSum {
             map.put(nums[i], i);
         }
         for (int i = 0; i < nums.length; i++) {
-            Integer object = map.get(target - nums[i]);
-            if (object != null && object != i) {
+            Integer index = map.get(target - nums[i]);
+            if (index != null && index != i) {
                 int[] result = new int[2];
                 result[0] = i;
-                result[1] = object;
+                result[1] = index;
                 return result;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 只需要遍历一遍map
+     * <p>
+     * 时间复杂度:O(n)  遍历一遍map，节省了初始化map的时间
+     * 空间复杂度:O(n)  需要一个map存放n个元素
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSumMapOnce(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap();
+        for (int i = 0; i < nums.length; i++) {
+            Integer index = map.get(target - nums[i]);
+            if (index != null && index != i) {
+                int[] result = new int[2];
+                result[0] = index;
+                result[1] = i;
+                return result;
+            } else {
+                map.put(nums[i], i);
             }
         }
         return null;
@@ -71,7 +103,7 @@ public class TwoSum {
 
     public static void main(String[] args) {
         int[] nums = {3, 2, 4};
-        int[] result = new TwoSum().twoSumMap(nums, 6);
+        int[] result = new TwoSum().twoSumMapOnce(nums, 6);
         for (int i : result) {
             System.out.println(i);
         }
