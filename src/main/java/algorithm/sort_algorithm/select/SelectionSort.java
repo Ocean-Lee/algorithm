@@ -1,4 +1,4 @@
-package sort.select;
+package algorithm.sort_algorithm.select;
 
 import static util.ArrayUtils.print;
 

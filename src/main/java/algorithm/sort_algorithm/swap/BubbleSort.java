@@ -1,4 +1,4 @@
-package sort.swap;
+package algorithm.sort_algorithm.swap;
 
 import static util.ArrayUtils.print;
 

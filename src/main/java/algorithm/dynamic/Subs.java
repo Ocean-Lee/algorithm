@@ -1,4 +1,4 @@
-package dynamic;
+package algorithm.dynamic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class Subs {
         char[] chars = "ABCDEFGHIKHHJJJJJJJJ0000000000".toCharArray();
         List list = new ArrayList();
 //        char[] sub = new char[5];
-//        getLenNofSequence(sub, 0, chars, 0, list);
+//        getLenNofSequence(sub, 0, chars, 0, liner_structure.list);
         getAllSequence(chars.length, chars, list);
 //        getLen3ofSequence(chars);
         System.out.println(chars.length + "\t\t" + Math.pow(2, chars.length) + "\t\t" + (list.size() + 1));

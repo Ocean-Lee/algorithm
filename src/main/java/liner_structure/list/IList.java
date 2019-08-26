@@ -1,4 +1,4 @@
-package list;
+package liner_structure.list;
 
 /**
  * 线性表常用操作定义

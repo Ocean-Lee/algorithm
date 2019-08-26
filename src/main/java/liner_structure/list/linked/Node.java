@@ -1,4 +1,4 @@
-package list.linked;
+package liner_structure.list.linked;
 
 /**
  * 节点类的描述

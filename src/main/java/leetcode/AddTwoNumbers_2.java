@@ -3,7 +3,7 @@ package leetcode;
 /**
  * You are given two non-empty linked lists representing two non-negative integers.
  * The digits are stored in reverse order and each of their nodes contain a single
- * digit. Add the two numbers and return it as a linked list.
+ * digit. Add the two numbers and return it as a linked liner_structure.list.
  * You may assume the two numbers do not contain any leading zero, except
  * the number 0 itself.
  * <p>
@@ -167,7 +167,7 @@ public class AddTwoNumbers_2 {
 }
 
 /**
- * Definition for singly-linked list.
+ * Definition for singly-linked liner_structure.list.
  */
 class ListNode {
     int val;

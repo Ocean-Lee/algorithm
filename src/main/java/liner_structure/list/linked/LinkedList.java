@@ -1,6 +1,6 @@
-package list.linked;
+package liner_structure.list.linked;
 
-import list.IList;
+import liner_structure.list.IList;
 
 /**
  * @author yancy
